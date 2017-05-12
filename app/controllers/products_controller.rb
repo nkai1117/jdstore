@@ -5,11 +5,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
   end
-  # def destroy
-  #   @product = Product.find(params[:id])
-  #   @destroy.save
-  #   redirect_to carts_path
-  # end
+  
   def add_to_cart
     @product = Product.find(params[:id])
     current_cart.add_product_to_cart(@product)
