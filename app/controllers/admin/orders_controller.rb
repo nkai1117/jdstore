@@ -13,7 +13,6 @@ class Admin::OrdersController < ApplicationController
     @product_lists = @order.product_lists
   end
 
-   #可以依照“按照状态图”改变状态
   def ship
     @order = Order.find(params[:id])
     @order.ship!
