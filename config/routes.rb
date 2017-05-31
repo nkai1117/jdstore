@@ -9,7 +9,14 @@ Rails.application.routes.draw do
   end
   namespace :admin do
     resources :products
-    resources :orders
+    resources :orders do  #按照状态图 改变状态
+      member do
+        post :cancel
+        post :ship
+        post :shipped
+        post :return
+      end
+    end
   end
 resources :cart_items
 
