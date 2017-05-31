@@ -20,7 +20,7 @@ class Order < ApplicationRecord
     self.update_columns(is_paid: true)
   end
 
-  include AASM   #设定订单状态机制
+  include AASM
 
   aasm do
     state :order_placed, initial: true
@@ -30,7 +30,8 @@ class Order < ApplicationRecord
     state :order_cancelled
     state :good_returned
 
-    event :make_payment, after_commit: :pay! do # 用AASM的机制设定订单付款
+
+    event :make_payment, after_commit: :pay! do
       transitions from: :order_placed, to: :paid
     end
 
@@ -40,14 +41,14 @@ class Order < ApplicationRecord
 
     event :deliver do
       transitions from: :shipping,     to: :shipped
-  end
+    end
 
-  event :return_good do
-    transitions from: :shipped,        to: :good_returned
-  end
+    event :return_good do
+      transitions from: :shipped,      to: :good_returned
+    end
 
-  event :cancel_order do
-    transitions from: [:order_placed, :paid], to: :order_cancelled
+    event :cancel_order do
+      transitions from: [:order_placed, :paid], to: :order_cancelled
+    end
   end
-end
 end

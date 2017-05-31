@@ -7,6 +7,7 @@
       <th>生成时间</th>
       <th>订购者</th>
       <th>订单状态</th>
+      <th>选项</th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +17,7 @@
       <td> <%= order.created_at.to_s(:long) %> </td>
       <td> <%= order.user.email %></td>
       <td> <%= order.aasm_state %> </td>
+      <td> <%= link_to("Destroy", admin_order_path, :method => :delete, :data => { :confirm => "Are you sure?" }) %> </td>
     </tr>
     <% end %>
 
